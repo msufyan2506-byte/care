@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarePlus - Healthcare Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary-blue: #0056b3; /* Deep Blue */
+            --light-blue: #e3f2fd;  /* Light Blue Background */
+            --white: #ffffff;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-dark);
+        }
+
+        /* --- HEADER & NAVBAR --- */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .cta-btn {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: #004494;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(0, 86, 179, 0.8), rgba(0, 86, 179, 0.6)), url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        /* --- SERVICES SECTION --- */
+        .section {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            margin-top: 10px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        /* --- DOCTORS SECTION --- */
+        .doctors {
+            background-color: var(--light-blue);
+        }
+
+        .doctor-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .doctor-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .doctor-info {
+            padding: 20px;
+        }
+
+        .doctor-info h3 {
+            color: var(--primary-blue);
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+        }
+
+        .contact-info, .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .contact-item i {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+        }
+
+        form input, form textarea, form select {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        form button {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 15px 30px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        form button:hover {
+            background-color: #004494;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* --- MEDIA QUERIES (Responsive) --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 100%;
+                background-color: var(--white);
+                text-align: center;
+                padding: 20px 0;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i> CarePlus
+            </div>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#doctors">Doctors</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="cta-btn">Book Appointment</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h1>Your Health, Our Priority</h1>
+        <p>Providing world-class healthcare services with expert doctors and modern technology.</p>
+        <a href="#services" class="cta-btn">Explore Services</a>
+    </section>
+
+    <section id="services" class="section">
+        <div class="section-title">
+            <h2>Our Services</h2>
+            <p>Comprehensive care for you and your family.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-user-md"></i>
+                <h3>General Medicine</h3>
+                <p>Expert diagnosis and treatment for everyday health issues.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-tooth"></i>
+                <h3>Dental Care</h3>
+                <p>Complete dental solutions from cleaning to surgery.</p>
+            </div>
+             <div class="service-card">
+                <i class="fas fa-tooth"></i>
+                <h3>Dental Care</h3>
+                <p>Complete dental solutions from cleaning to surgery.</p>
+            </div>
+             <div class="service-card">
+                <i class="fas fa-tooth"></i>
+                <h3>Dental Care</h3>
+                <p>Complete dental solutions from cleaning to surgery.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-heartbeat"></i>
+                <h3>Cardiology</h3>
+                <p>Advanced heart care with top cardiologists.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-eye"></i>
+                <h3>Eye Care</h3>
+                <p>Vision correction and eye health checkups.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="doctors" class="section doctors">
+        <div class="section-title">
+            <h2>Meet Our Specialist</h2>
+            <p>Experienced doctors ready to help you.</p>
+        </div>
+        <div class="services-grid">
+            <div class="doctor-card">
+                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Doctor 1">
+                <div class="doctor-info">
+                    <h3>Dr. Ali Khan</h3>
+                    <p>Cardiologist</p>
+                </div>
+            </div>
+            <div class="doctor-card">
+                <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Doctor 2">
+                <div class="doctor-info">
+                    <h3>Dr. Sarah Ahmed</h3>
+                    <p>Neurologist</p>
+                </div>
+            </div>
+             <div class="doctor-card">
+                <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Doctor 2">
+                <div class="doctor-info">
+                    <h3>Dr. Sarah Ahmed</h3>
+                    <p>Neurologist</p>
+                </div>
+            </div>
+             <div class="doctor-card">
+                <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Doctor 2">
+                <div class="doctor-info">
+                    <h3>Dr. Sarah Ahmed</h3>
+                    <p>Neurologist</p>
+                </div>
+            </div>
+             <div class="doctor-card">
+                <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Doctor 2">
+                <div class="doctor-info">
+                    <h3>Dr. Sarah Ahmed</h3>
+                    <p>Neurologist</p>
+                </div>
+            </div>
+            
+            <div class="doctor-card">
+                <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Doctor 3">
+                <div class="doctor-info">
+                    <h3>Dr. Bilal Raza</h3>
+                    <p>Dentist</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="section-title">
+            <h2>Book an Appointment</h2>
+            <p>Fill the form below to get in touch.</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>123 Medical Street, Karachi, Pakistan</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <p>+92 300 1234567</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>info@careplus.com</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <p>Mon - Sat: 9:00 AM - 9:00 PM</p>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form id="appointmentForm">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <input type="tel" placeholder="Phone Number" required>
+                    <select>
+                        <option>Select Department</option>
+                        <option>Cardiology</option>
+                        <option>Dental</option>
+                        <option>General</option>
+                    </select>
+                    <textarea rows="4" placeholder="Message or Problem"></textarea>
+                    <button type="submit">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p> 2024 CarePlus Healthcare. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Toggle Mobile Menu
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Simple Form Alert
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Aapki appointment request bhej di gayi hai! Hum jald aapse raabta karenge.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
